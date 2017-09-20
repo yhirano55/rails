@@ -1,0 +1,13 @@
+Description:
+    Stubs out a new model as Plain Old Ruby Object.
+    Pass the model name, either CamelCased or under_scored.
+
+    To create a model within a module, specify the model name as a
+    path like 'parent_module/model_name'.
+
+Example:
+    `rails generate plain_model address`
+
+    Address plain model.
+        Model:     app/models/address.rb
+
