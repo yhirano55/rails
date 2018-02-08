@@ -24,6 +24,11 @@ module ActiveStorage
             io: attachable.open,
             filename: attachable.original_filename,
             content_type: attachable.content_type
+        when OpenURI::Meta
+          ActiveStorage::Blob.create_after_upload! \
+            io: attachable,
+            filename: File.basename(attachable.base_uri.to_s),
+            content_type: attachable.content_type
         when Hash
           ActiveStorage::Blob.create_after_upload!(attachable)
         when String

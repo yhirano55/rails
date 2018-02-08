@@ -31,6 +31,18 @@ class ActiveStorage::AttachmentsTest < ActiveSupport::TestCase
     assert_equal "racecar.jpg", @user.avatar.filename.to_s
   end
 
+  test "attach new blob from a Tempfile or StringIO which is extended with OpenURI::Meta" do
+    file = open("http://rubyonrails.org/images/rails-logo.svg")
+    @user.avatar.attach(file)
+    assert_equal "rails-logo.svg", @user.avatar.filename.to_s
+  end
+
+  test "attach from url" do
+    url = "http://rubyonrails.org/images/rails-logo.svg"
+    @user.avatar.attach_from_url(url)
+    assert_equal "rails-logo.svg", @user.avatar.filename.to_s
+  end
+
   test "replace attached blob" do
     @user.avatar.attach create_blob(filename: "funky.jpg")
 
